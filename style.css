@@ -389,6 +389,7 @@ header .master_play .bar .bar2{
     width: 0%;
     background: #36e2ec;
     top: 0;
+    transition: .5s;
 }
 header .master_play .bar .dot{
     position: absolute;
