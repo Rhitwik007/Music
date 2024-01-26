@@ -1,3 +1,4 @@
+const master_play = document.querySelector(".master_play")
 let music = new Audio('vande.mp3');
 // create Array
 const header =document.querySelector(".header")
@@ -222,16 +223,15 @@ back.addEventListener('click', ()=>{
         index = Array.from(document.getElementsByClassName('songItem')).length;
     }
     music.src = `audio/${index}.mp3`;
-    poster_master_play.src =`img/${index}.jpg`;
-    music.play();
-    let song_title = songs.filter((ele)=>{
-        return ele.id == index;
-    })
-
-    song_title.forEach(ele =>{
-        let {songName} = ele;
-        title.innerHTML = songName;
-    })
+        poster_master_play.src = `img/${index}.jpg`; //for the image of song played
+        music.play();
+        let song_title = songs.filter((ele)=>{     // for the name of song played
+            return ele.id == index;               // for the name of song played
+        })
+        song_title.forEach(ele=>{
+            let {songname} = ele;
+            title.innerHTML = songname;
+        })
     makeAllPlays()
 
     document.getElementById(`${index}`).classList.remove('bi-play-fill');
@@ -246,17 +246,16 @@ next.addEventListener('click', ()=>{
     if (index > Array.from(document.getElementsByClassName('songItem')).length) {
         index = 1;
         }
-    music.src = `audio/${index}.mp3`;
-    poster_master_play.src =`img/${index}.jpg`;
-    music.play();
-    let song_title = songs.filter((ele)=>{
-        return ele.id == index;
-    })
-
-    song_title.forEach(ele =>{
-        let {songName} = ele;
-        title.innerHTML = songName;
-    })
+        music.src = `audio/${index}.mp3`;
+        poster_master_play.src = `img/${index}.jpg`; //for the image of song played
+        music.play();
+        let song_title = songs.filter((ele)=>{     // for the name of song played
+            return ele.id == index;               // for the name of song played
+        })
+        song_title.forEach(ele=>{
+            let {songname} = ele;
+            title.innerHTML = songname;
+        })
     makeAllPlays()
 
     document.getElementById(`${index}`).classList.remove('bi-play-fill');
@@ -294,5 +293,54 @@ Array.from(document.getElementsByClassName('songItem')).forEach((element, i)=>{
     element.getElementsByTagName('img')[0].src = songs[i].poster;
     element.getElementsByTagName('h5')[0].innerHTML = songs[i].songname;
 })
+
+
+//change loop, shuffle, repeat icon on click
+const repeatBtn = master_play.querySelector("#repeat-plist");
+repeatBtn.addEventListener("click", ()=>{
+  let getText = repeatBtn.innerText; //getting this tag innerText
+  switch(getText){
+    case "repeat":
+      repeatBtn.innerText = "repeat_one";
+//       repeatBtn.setAttribute("title", "Song looped");
+//       break;
+//     case "repeat_one":
+//       repeatBtn.innerText = "shuffle";
+//       repeatBtn.setAttribute("title", "Playback shuffled");
+//       break;
+//     case "shuffle":
+//       repeatBtn.innerText = "repeat";
+//       repeatBtn.setAttribute("title", "Playlist looped");
+//       break;
+//   }
+// });
+
+// //code for what to do after song ended
+// mainAudio.addEventListener("ended", ()=>{
+//   // we'll do according to the icon means if user has set icon to
+//   // loop song then we'll repeat the current song and will do accordingly
+//   let getText = repeatBtn.innerText; //getting this tag innerText
+//   switch(getText){
+//     case "repeat":
+//       nextMusic(); //calling nextMusic function
+//       break;
+//     case "repeat_one":
+//       mainAudio.currentTime = 0; //setting audio current time to 0
+//       loadMusic(musicIndex); //calling loadMusic function with argument, in the argument there is a index of current song
+//       playMusic(); //calling playMusic function
+//       break;
+//     case "shuffle":
+//       let randIndex = Math.floor((Math.random() * allMusic.length) + 1); //genereting random index/numb with max range of array length
+//       do{
+//         randIndex = Math.floor((Math.random() * allMusic.length) + 1);
+//       }while(musicIndex == randIndex); //this loop run until the next random number won't be the same of current musicIndex
+//       musicIndex = randIndex; //passing randomIndex to musicIndex
+//       loadMusic(musicIndex);
+//       playMusic();
+//       playingSong();
+//       break;
+  }
+});
+
 
 
